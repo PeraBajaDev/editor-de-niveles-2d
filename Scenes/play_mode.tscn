@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cha70siysu08m"]
+
+[ext_resource type="Script" path="res://Scripts/play_mode.gd" id="1_nol7d"]
+[ext_resource type="PackedScene" uid="uid://cdn2jsqrlibs7" path="res://Scenes/layer.tscn" id="2_t6ds6"]
+[ext_resource type="Script" path="res://Scripts/camera_2d.gd" id="3_gt3u0"]
+
+[node name="Level" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_nol7d")
+configured_tile_map_layer = ExtResource("2_t6ds6")
+
+[node name="UI2" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI2"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("3_gt3u0")
+initial_movement_speed = 400
+movement_speed_when_shifting = 800
