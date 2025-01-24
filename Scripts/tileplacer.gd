@@ -3,7 +3,7 @@ extends TileMapLayer
 
 var selected_terrain_set : int = 0
 var selected_terrain : int = 0 
-
+var used_cell_coords: Array[Vector2i]
 signal tile_placed(atlas_coords: Vector2i, coords: Vector2i)
 
 signal tile_deleted()
@@ -16,7 +16,6 @@ func place_tile() -> void:
 	set_cells_terrain_connect([mouse_position], selected_terrain_set, selected_terrain, false)
 	
 	tile_placed.emit(get_cell_atlas_coords(mouse_position), map_to_local(mouse_position))
-	
 func delete_tile():
 	var mouse_position = get_mouse_position()
 	if not has_tile(mouse_position): return
@@ -39,3 +38,13 @@ func tile_same_as_selected(mouse_position) -> bool:
 	if not tile: return false
 	
 	return tile.terrain == selected_terrain and tile.terrain_set == selected_terrain_set
+	
+func get_used_tiles_atlas_coords(used_cells: Array[Vector2i]) -> Array:
+	return used_cells.map(func(coord): return get_cell_atlas_coords(coord))
+	
+func load_cells(used_cells: Array[Vector2i], used_tiles_atlas_coords: Array[Vector2i]):
+	if not used_cells or not used_tiles_atlas_coords:
+		return
+	
+	for i in range(used_cells.size()):
+		set_cell(used_cells[i], 0, used_tiles_atlas_coords[i])

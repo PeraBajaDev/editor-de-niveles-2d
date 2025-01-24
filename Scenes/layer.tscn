@@ -1,0 +1,21 @@
+[gd_scene load_steps=7 format=3 uid="uid://cdn2jsqrlibs7"]
+
+[ext_resource type="TileSet" uid="uid://bbtmfhv774qs5" path="res://tiles.tres" id="1_pjccn"]
+[ext_resource type="Script" path="res://Scripts/tileplacer.gd" id="2_l5kv6"]
+[ext_resource type="AudioStream" uid="uid://dcleo237kf0cj" path="res://Sound FX/641216__spiderfair__highlightlong.wav" id="3_dfeew"]
+[ext_resource type="Script" path="res://Scripts/tile_sound.gd" id="4_xpoep"]
+[ext_resource type="Script" path="res://Scripts/tile_animator.gd" id="5_6xsqk"]
+[ext_resource type="Texture2D" uid="uid://cr4me0lslqk22" path="res://Sprites/tilemap.png" id="6_ltjd8"]
+
+[node name="Layer" type="TileMapLayer"]
+tile_set = ExtResource("1_pjccn")
+script = ExtResource("2_l5kv6")
+
+[node name="TileSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dfeew")
+max_polyphony = 20
+script = ExtResource("4_xpoep")
+
+[node name="TileAnimator" type="Node" parent="."]
+script = ExtResource("5_6xsqk")
+tileset_texture = ExtResource("6_ltjd8")

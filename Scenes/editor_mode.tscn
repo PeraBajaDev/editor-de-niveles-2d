@@ -1,0 +1,173 @@
+[gd_scene load_steps=13 format=3 uid="uid://bgyq0vl0xnxd1"]
+
+[ext_resource type="Script" path="res://Scripts/tile_map_layer_container.gd" id="1_rw2fq"]
+[ext_resource type="PackedScene" uid="uid://cdn2jsqrlibs7" path="res://Scenes/layer.tscn" id="2_d7pmg"]
+[ext_resource type="Script" path="res://Scripts/grid_view.gd" id="3_724va"]
+[ext_resource type="Texture2D" uid="uid://dwpkodpwictrq" path="res://Sprites/Individual Tiles/tile_0036.png" id="4_82oi4"]
+[ext_resource type="Script" path="res://Scripts/tile_selected.gd" id="5_px641"]
+[ext_resource type="Texture2D" uid="uid://dvod4jnxhv2xn" path="res://Sprites/Individual Tiles/tile_0039.png" id="6_ccljo"]
+[ext_resource type="Texture2D" uid="uid://wcslbmr7e3f2" path="res://Sprites/Individual Tiles/tile_0042.png" id="7_wstxk"]
+[ext_resource type="Texture2D" uid="uid://cty2ch37hap64" path="res://Sprites/Individual Tiles/tile_0013.png" id="8_s5lgw"]
+[ext_resource type="Texture2D" uid="uid://dnc04p6k5f306" path="res://Sprites/Individual Tiles/tile_0055.png" id="9_ntsth"]
+[ext_resource type="Script" path="res://Scripts/layer_ui_controller.gd" id="10_3n6v2"]
+[ext_resource type="PackedScene" uid="uid://cha70siysu08m" path="res://Scenes/play_mode.tscn" id="11_80u6l"]
+[ext_resource type="Script" path="res://Scripts/camera_2d.gd" id="12_slxsd"]
+
+[node name="Editor" type="Node2D"]
+
+[node name="TileMapLayerContainer" type="Node2D" parent="."]
+scale = Vector2(5, 5)
+script = ExtResource("1_rw2fq")
+configured_tile_map_layer_scene = ExtResource("2_d7pmg")
+
+[node name="Layer" parent="TileMapLayerContainer" instance=ExtResource("2_d7pmg")]
+
+[node name="GridView" type="Node2D" parent="."]
+scale = Vector2(5, 5)
+script = ExtResource("3_724va")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="AutoTiles" type="VBoxContainer" parent="UI/MarginContainer"]
+layout_mode = 2
+
+[node name="HillTile" type="Button" parent="UI/MarginContainer/AutoTiles"]
+layout_mode = 2
+text = "Hill"
+icon = ExtResource("4_82oi4")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_px641")
+
+[node name="WatherTile" type="Button" parent="UI/MarginContainer/AutoTiles"]
+layout_mode = 2
+text = "Wather"
+icon = ExtResource("6_ccljo")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_px641")
+terrain_set_id = 1
+terrain_id = 1
+
+[node name="PathTile" type="Button" parent="UI/MarginContainer/AutoTiles"]
+layout_mode = 2
+text = "Path"
+icon = ExtResource("7_wstxk")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_px641")
+terrain_id = 1
+
+[node name="TreeTile" type="Button" parent="UI/MarginContainer/AutoTiles"]
+layout_mode = 2
+text = "Trees"
+icon = ExtResource("8_s5lgw")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_px641")
+terrain_set_id = 1
+
+[node name="RiverTile" type="Button" parent="UI/MarginContainer/AutoTiles"]
+layout_mode = 2
+text = "River"
+icon = ExtResource("9_ntsth")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_px641")
+terrain_set_id = 1
+terrain_id = 2
+
+[node name="Human" type="Button" parent="UI/MarginContainer/AutoTiles"]
+layout_mode = 2
+text = "Humans"
+icon = ExtResource("9_ntsth")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+script = ExtResource("5_px641")
+terrain_set_id = 1
+terrain_id = 3
+
+[node name="Actions" type="HBoxContainer" parent="UI/MarginContainer/AutoTiles" node_paths=PackedStringArray("tile_map_layer_container", "editor")]
+layout_mode = 2
+script = ExtResource("10_3n6v2")
+tile_map_layer_container = NodePath("../../../../TileMapLayerContainer")
+editor = NodePath("../../../..")
+play_mode_scene = ExtResource("11_80u6l")
+
+[node name="Substract" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+layout_mode = 2
+text = "-
+"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="PreviousLayer" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+layout_mode = 2
+text = "<<
+"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="LayerCount" type="Label" parent="UI/MarginContainer/AutoTiles/Actions"]
+layout_mode = 2
+text = "0"
+
+[node name="NextLayer" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+layout_mode = 2
+text = ">>
+"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Add" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+layout_mode = 2
+text = "+"
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="PlayLevel" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Play Level"
+
+[node name="Save" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Save"
+
+[node name="Load" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Load"
+
+[node name="LevelSelectionMenu" type="Button" parent="UI/MarginContainer/AutoTiles/Actions"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Select Level
+"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("12_slxsd")
+initial_movement_speed = 600
+movement_speed_when_shifting = 2000
