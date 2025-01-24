@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmyxoi2sncref"]
+
+[ext_resource type="Script" path="res://Scripts/level_button.gd" id="1_yslsm"]
+[ext_resource type="PackedScene" uid="uid://cha70siysu08m" path="res://Scenes/play_mode.tscn" id="2_ed1ea"]
+[ext_resource type="PackedScene" uid="uid://bgyq0vl0xnxd1" path="res://Scenes/editor_mode.tscn" id="3_wtg82"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ohre"]
+
+[node name="LevelButton" type="HBoxContainer" node_paths=PackedStringArray("edit_name_input", "confirm_name")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+script = ExtResource("1_yslsm")
+play_mode_scene = ExtResource("2_ed1ea")
+edit_mode_scene = ExtResource("3_wtg82")
+edit_name_input = NodePath("LineEdit")
+confirm_name = NodePath("ConfirmName")
+
+[node name="LevelName" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1ohre")
+text = "Level Name"
+alignment = 0
+clip_text = true
+
+[node name="Edit" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "Edit"
+
+[node name="EditName" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "Edit name
+"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "Insert level name"
+max_length = 20
+expand_to_text_length = true
+
+[node name="ConfirmName" type="Button" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+text = "Confirm
+"
+
+[node name="Delete" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 20
+text = "Delete
+"

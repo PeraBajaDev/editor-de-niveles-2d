@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhmtumsmntpj1"]
+
+[ext_resource type="Script" path="res://Scripts/level_selector.gd" id="1_4jbtl"]
+[ext_resource type="PackedScene" uid="uid://dmyxoi2sncref" path="res://Scenes/level_button.tscn" id="2_iji6l"]
+[ext_resource type="Script" path="res://Scripts/add_level.gd" id="3_7t6mm"]
+
+[node name="LevelSelector" type="MarginContainer" node_paths=PackedStringArray("levels_container", "add_level")]
+custom_minimum_size = Vector2(1200, 500)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4jbtl")
+levels_container = NodePath("VBoxContainer/Levels")
+level_button_scene = ExtResource("2_iji6l")
+add_level = NodePath("VBoxContainer/MarginContainer/HBoxContainer/AddLevel")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Levels" type="VBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1200, 500)
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="AddLevel" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer" node_paths=PackedStringArray("levels_container", "level_name_input", "confirm_name")]
+layout_mode = 2
+text = "Add new level
+"
+script = ExtResource("3_7t6mm")
+levels_container = NodePath("../../../Levels")
+level_button_scene = ExtResource("2_iji6l")
+level_name_input = NodePath("../LineEdit")
+confirm_name = NodePath("../ConfirmName")
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+placeholder_text = "Insert level name"
+max_length = 20
+expand_to_text_length = true
+
+[node name="ConfirmName" type="Button" parent="VBoxContainer/MarginContainer/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Confirm
+"
